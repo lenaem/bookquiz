@@ -1,28 +1,17 @@
 <head>
-  <title>Todo List</title>
+    <title>---</title>
 </head>
+
 <body>
-  <div class="container">
-    <header>
-      <h1>Todo List</h1>
-      <form class="new-task">
-        <input type="text" name="text" placeholder="Type to add new tasks" />
-      </form>
-    </header>
-    
-    <ul>
-      {{#each tasks}}
-      {{> task}}
-      {{/each}}
-    </ul>
-  </div>
+    <div class="container">
+        <header>
+            <h1>Quiz</h1>
+        </header>
+        <div>
+            <p>{{showQuestions}}</p>
+            <button type="button" class="yes">I know it!</button>
+            <button type="button" class="no">Show the answer, please!</button>
+            <p> {{feedback}} </p>
+        </div>
+    </div>
 </body>
-<template name="task">
-<li class="{{#if checked}}checked{{/if}}">
-  <button class="delete">&times;</button>
-  
-  <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
-  
-  <span class="text">{{text}}</span>
-</li>
-</template>

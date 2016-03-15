@@ -1,79 +1,29 @@
-
-
-Tasks = new Mongo.Collection("tasks");
-
 if (Meteor.isClient) {
 
-  // This code only runs on the client
 
-  Template.body.helpers({
+    // set questions
+    var questions = ["First question", "second question", "third question"]
+    var answers = ["Good", "I will show you the answer then", "default"]
+    var whichButton = 2
 
-    tasks: function () {
 
-      // Show newest tasks at the top
+    // This code only runs on the client
+    Template.body.helpers({
+        showQuestions: function() {
+            return questions[0];
+        },
+        feedback: function() {
+            var whichAnswer = Session.get("whichButton")
+            return answers[whichAnswer];
+        }
+    });
 
-      return Tasks.find({}, {sort: {createdAt: -1}});
-
-    }
-
-  });
-  Template.body.events({
-
-    "submit .new-task": function (event) {
-
-      // Prevent default browser form submit
-
-      event.preventDefault();
-
- 
-
-      // Get value from form element
-
-      var text = event.target.text.value;
-
- 
-
-      // Insert a task into the collection
-
-      Tasks.insert({
-
-        text: text,
-
-        createdAt: new Date() // current time
-
-      });
-
- 
-
-      // Clear form
-
-      event.target.text.value = "";
-
-    }
-
-  });
-   
-
-  Template.task.events({
-
-    "click .toggle-checked": function () {
-
-      // Set the checked property to the opposite of its current value
-
-      Tasks.update(this._id, {
-
-        $set: {checked: ! this.checked}
-
-      });
-
-    },
-
-    "click .delete": function () {
-
-      Tasks.remove(this._id);
-
-    }
-
-  });
+    Template.body.events({
+        "click .yes": function() {
+            Session.set("whichButton", 0);
+        },
+        "click .no": function() {
+            Session.set("whichButton", 1);
+        }
+    });
 }
-
