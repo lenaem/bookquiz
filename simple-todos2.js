@@ -4,7 +4,7 @@ if (Meteor.isClient) {
     // set questions
     var questions = ["First question", "second question", "third question"]
     var answers = ["Good", "I will show you the answer then", "default"]
-    var whichButton = 2
+    Session.set("whichButton", 2)
 
 
     // This code only runs on the client
@@ -13,7 +13,7 @@ if (Meteor.isClient) {
             return questions[0];
         },
         feedback: function() {
-            var whichAnswer = Session.get("whichButton")
+            whichAnswer = Session.get("whichButton")
             return answers[whichAnswer];
         }
     });
