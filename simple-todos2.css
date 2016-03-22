@@ -1,4 +1,8 @@
-/* CSS declarations go here */
+/* Lenas class CSS declarations go here */
+.hidden {
+  opacity: 0;
+} 
+
 
 /* CSS declarations go here */
 body {
